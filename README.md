@@ -1,5 +1,5 @@
 
-# StepView [![](https://jitpack.io/v/vinaygopinath/StepView.svg)](https://jitpack.io/#vinaygopinath/StepView)
+# StepView [With RTL Support]
 A custom View for a step-by-step process (order checkout, app first launch, intro, timeline visualization). The StepView
 displays the name of the step and an icon associated with the state of the step (completed, currently active, not completed).
 
