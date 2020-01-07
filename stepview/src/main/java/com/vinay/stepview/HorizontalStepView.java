@@ -3,6 +3,7 @@ package com.vinay.stepview;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.TextView;
@@ -10,6 +11,8 @@ import android.widget.TextView;
 import com.vinay.stepview.models.Step;
 
 import java.util.List;
+
+import androidx.core.view.ViewCompat;
 
 /**
  * A {@link StepView} that displays steps horizontally, with the name of the {@link Step} below the
@@ -43,6 +46,7 @@ public class HorizontalStepView extends StepView {
     for (int i = 0; i < mStepList.size(); i++) {
       Step step = mStepList.get(i);
       TextView textView = mTextViewList.get(i);
+      textView.setScaleX(mStepViewIndicator.getLayoutDirection()==View.LAYOUT_DIRECTION_LTR?1:-1);
 
       textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, mTextSize);
       textView.setText(step.getName());

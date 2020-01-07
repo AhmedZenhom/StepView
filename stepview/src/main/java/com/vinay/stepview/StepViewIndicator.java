@@ -7,9 +7,9 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.content.res.AppCompatResources;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -48,6 +48,7 @@ abstract class StepViewIndicator extends View {
 
   Path mPath; // Path of lines leading to not-completed steps
   final Rect mRect = new Rect(); // The bounding rectangle of the Step icon/drawables
+  private boolean isLayoutDirectionRTL ;
 
   /**
    * Determines whether the StepView should be displayed in reverse order.
@@ -68,6 +69,7 @@ abstract class StepViewIndicator extends View {
 
   public StepViewIndicator(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
     super(context, attrs, defStyleAttr);
+    isLayoutDirectionRTL = context.getResources().getConfiguration().getLayoutDirection() == LAYOUT_DIRECTION_RTL;
     init();
   }
 
@@ -317,5 +319,9 @@ abstract class StepViewIndicator extends View {
     mCompletedStepIcon = AppCompatResources.getDrawable(getContext(), R.drawable.ic_completed);
     mCurrentStepIcon = AppCompatResources.getDrawable(getContext(), R.drawable.ic_current);
     mNotCompletedStepIcon = AppCompatResources.getDrawable(getContext(), R.drawable.ic_not_completed);
+  }
+
+  protected boolean isLayoutDirectionRTL() {
+    return isLayoutDirectionRTL;
   }
 }

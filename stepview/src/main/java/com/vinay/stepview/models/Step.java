@@ -1,6 +1,6 @@
 package com.vinay.stepview.models;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 /**
  * A model that represents a single step in the process.

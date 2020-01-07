@@ -60,8 +60,11 @@ class HorizontalStepViewIndicator extends StepViewIndicator {
     mCircleCenterPointPositionList.clear();
     final int numSteps = getNumOfSteps();
     for (int i = 0; i < numSteps; i++) {
-      float paddingLeft = (mWidth - numSteps * mCircleRadius * 2 - (numSteps - 1) * mLineLength) / 2;
-      mCircleCenterPointPositionList.add(paddingLeft + mCircleRadius + i * mCircleRadius * 2 + i * mLineLength);
+      float paddingStart = (mWidth - numSteps * mCircleRadius * 2 - (numSteps - 1) * mLineLength) / 2;
+      if (isLayoutDirectionRTL())
+        mCircleCenterPointPositionList.add(mWidth - (paddingStart + mCircleRadius + i * mCircleRadius * 2 + i * mLineLength));
+      else
+        mCircleCenterPointPositionList.add(paddingStart + mCircleRadius + i * mCircleRadius * 2 + i * mLineLength);
     }
 
     if (mUpdateIndicatorListener != null) {
@@ -76,8 +79,11 @@ class HorizontalStepViewIndicator extends StepViewIndicator {
     mCircleCenterPointPositionList.clear();
     final int numSteps = getNumOfSteps();
     for (int i = 0; i < numSteps; i++) {
-      float paddingLeft = (mWidth - numSteps * mCircleRadius * 2 - (numSteps - 1) * mLineLength) / 2;
-      mCircleCenterPointPositionList.add(paddingLeft + mCircleRadius + i * mCircleRadius * 2 + i * mLineLength);
+      float paddingStart = (mWidth - numSteps * mCircleRadius * 2 - (numSteps - 1) * mLineLength) / 2;
+      if (isLayoutDirectionRTL())
+        mCircleCenterPointPositionList.add(mWidth - (paddingStart + mCircleRadius + i * mCircleRadius * 2 + i * mLineLength));
+      else
+        mCircleCenterPointPositionList.add(paddingStart + mCircleRadius + i * mCircleRadius * 2 + i * mLineLength);
     }
     if (mUpdateIndicatorListener != null) {
       mUpdateIndicatorListener.onIndicatorUpdated();
@@ -88,9 +94,9 @@ class HorizontalStepViewIndicator extends StepViewIndicator {
     // Draw line from step circle to the next, customizing the line styling based on the step state
     for (int i = 0; i < mCircleCenterPointPositionList.size() - 1; i++) {
       // Centre coordinate of the current step's circle
-      final float stepXPosition = mCircleCenterPointPositionList.get(i);
+      final float stepXPosition = mCircleCenterPointPositionList.get(isLayoutDirectionRTL() ? i + 1 : i);
       // Centre coordinate of the next step's circle
-      final float nextStepXPosition = mCircleCenterPointPositionList.get(i + 1);
+      final float nextStepXPosition = mCircleCenterPointPositionList.get(isLayoutDirectionRTL() ? i : i + 1);
 
       if (mStepList.get(i + 1).getState() == Step.State.COMPLETED) {
         canvas.drawRect(stepXPosition + mCircleRadius - 10, mLeftY, nextStepXPosition - mCircleRadius + 10, mRightY, mCompletedLinePaint);
